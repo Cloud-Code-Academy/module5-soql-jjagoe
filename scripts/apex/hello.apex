@@ -9,5 +9,8 @@
 //System.debug('Hello World!');
 //System.debug('My name is ' + tempvar);
 
-List<Lead> getLeads = [SELECT Id, LastName, Company, Phone, Email FROM Lead];
-System.debug(getLeads);
+//List<Lead> leads = [SELECT Id, LastName, Company, Phone, Email FROM Lead];
+//System.debug(leads);
+String lastName = 'John';
+List<Contact> conLastName = [SELECT id, FirstName, LastName FROM Contact WHERE LastName =: lastName];
+System.debug(conLastName);
