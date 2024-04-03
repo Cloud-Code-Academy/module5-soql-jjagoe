@@ -41,9 +41,9 @@ public with sharing class SOQL {
      * Update the corresponding test class and testGetContactsByFirstName method to cover this method
      */
     public static List<Contact> getGetContactsByFirstName() {
-        String lastName = 'John';
-        List<Contact> conLastName = [SELECT id, FirstName, LastName FROM Contact WHERE LastName =: lastName];
-        return conLastName;
+        String FirstName = 'John';
+        List<Contact> conFirstName = [SELECT id, Name, Contact.FirstName, Contact.LastName FROM Contact WHERE Contact.FirstName =: FirstName];
+        return conFirstName;
     }
 
     /**
