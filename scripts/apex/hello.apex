@@ -11,6 +11,6 @@
 
 //List<Lead> leads = [SELECT Id, LastName, Company, Phone, Email FROM Lead];
 //System.debug(leads);
-String firstName = 'John';
-List<Contact> conFirstName = [SELECT id, Name.FirstName, Name.LastName FROM Contact WHERE FirstName =: firstName];
-System.debug(conFirstName);
+//String lastName = 'John';
+List<Contact> conIds = [SELECT id, Name.FirstName, Name.LastName FROM Contact WHERE Name.LastName = 'Smith' OR Name.LastName = 'Jones'];
+System.debug(conIds);
