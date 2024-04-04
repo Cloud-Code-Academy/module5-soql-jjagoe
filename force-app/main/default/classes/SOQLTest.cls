@@ -190,7 +190,7 @@ public with sharing class SOQLTest {
         insert new List<Opportunity>{testOpportunity1, testOpportunity2, testOpportunity3};
 
         // Call the method to test
-        List<Opportunity> opportunities = SOQL.getOpportunitiesByNameKeyword('Keyword');
+        List<Opportunity> opportunities = SOQL.getOpportunitiesByNameKeyword('keyword');
 
         // Assert that the number of opportunities returned is correct
         System.assertEquals(1, opportunities.size(), 'Number of opportunities returned is incorrect.');
