@@ -85,8 +85,7 @@ public with sharing class SOQL {
      * Update the corresponding test class and testGetAccountCount method to cover this method
      */
      public static Integer getAccountCount () {
-        List<AggregateResult> countOfaccs = [SELECT COUNT(Id) countOfIds FROM Account];
-        Integer accCount = (Integer) countOfaccs[0].get('countOfIds');
+        Integer accCount = [SELECT COUNT() FROM Account];
         return AccCount;
       }
 
