@@ -12,5 +12,8 @@
 //List<Lead> leads = [SELECT Id, LastName, Company, Phone, Email FROM Lead];
 //System.debug(leads);
 //String lastName = 'John';
-List<Contact> conIds = [SELECT id, Name.FirstName, Name.LastName FROM Contact WHERE Name.LastName = 'Smith' OR Name.LastName = 'Jones'];
-System.debug(conIds);
+//List<Contact> conIds = [SELECT id, Name.FirstName, Name.LastName FROM Contact WHERE Name.LastName = 'Smith' OR Name.LastName = 'Jones'];
+//System.debug(conIds);
+ID acctId = '001ak00000Ak48yAAB';
+List<Opportunity> closedWonOpps = [SELECT Name, StageName, CloseDate, AccountId, Amount FROM Opportunity WHERE StageName = 'Closed Won' AND AccountId = '001ak00000Ak48yAAB'];
+System.debug(closedWonOpps);
