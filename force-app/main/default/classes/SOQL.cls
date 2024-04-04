@@ -132,7 +132,8 @@ public with sharing class SOQL {
      * @return A list of Case records.
      */
     public static List<Case> getFilterCaseOrigins() {
-        return null; // Replace null with the variable you used to store the result
+        List<Case> FilterCaseOriginsList = [SELECT AccountId, Status, Origin FROM Case WHERE Origin != 'Web' OR Origin = 'Email' OR Origin = ''];
+        return FilterCaseOriginsList; 
     }
 
     /**

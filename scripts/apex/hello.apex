@@ -17,6 +17,6 @@
 //ID acctId = '001ak00000Ak48yAAB';
 //List<Opportunity> closedWonOpps = [SELECT Name, StageName, CloseDate, AccountId, Amount FROM Opportunity WHERE StageName = 'Closed Won' AND AccountId = '001ak00000Ak48yAAB'];
 //System.debug(closedWonOpps);
-String keyWord = 'Ba';
-List<Opportunity> opps = [SELECT Id,Name FROM Opportunity WHERE Name LIKE '%Ba%'];
-System.debug(opps);
+//String keyWord = 'Ba';
+List<Case> FilterCaseOriginsList = [SELECT AccountId, Status, Origin FROM Case WHERE Origin != 'Web' OR Origin = 'Email' OR Origin = ''];
+System.debug(FilterCaseOriginsList);
