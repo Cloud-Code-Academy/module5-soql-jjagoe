@@ -147,9 +147,8 @@ public with sharing class SOQL {
      * Update the corresponding test class and testGetLeadsBySourceOrTitle method to cover this method
      */
     public static List<Lead> getLeadsBySourceOrTitle (String leadSource, String keyword) {
-        String sourceLead = '%' + leadSource + '%';
         String word = '%' + keyword + '%';
-        List<Lead> sourceOrTitleList = [SELECT Name, LeadSource, Title FROM Lead WHERE LeadSource =: sourceLead  OR Title LIKE : word];
+        List<Lead> sourceOrTitleList = [SELECT LastName, Company, Phone, Email,LeadSource, Title FROM Lead WHERE LeadSource =: leadSource OR Title LIKE : word];
         return sourceOrTitleList;
     }    
 
