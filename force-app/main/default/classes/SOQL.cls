@@ -109,7 +109,7 @@ public with sharing class SOQL {
      * Update the corresponding test class and testGetContactsByEmailDomain method to cover this method
      */
     public static List<Contact> getContactsByEmailDomain () {
-        List<Contact> consByEmailDomainList = [SELECT AccountId, FirstName, LastName, Email FROM Contact WHERE Email LIKE '%example.com'];
+        List<Contact> consByEmailDomainList = [SELECT Id, Name, Email FROM Contact WHERE Email LIKE '%example.com'];
         return(consByEmailDomainList);
      }
 
