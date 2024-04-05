@@ -243,14 +243,14 @@ public with sharing class SOQL {
         Set<Id> idSet = new Set<Id>();
 
         // Query the Cases
-        List<Case> cases = [SELECT AccountId FROM Case WHERE AccountId = :accountId];
+        List<Case> cases = [SELECT Id, AccountId FROM Case WHERE AccountId = :accountId];
 
         // Loop through each Case and add the Id to the set
         for (Case c : cases) {
-            idSet.add(c.AccountId);
+            idSet.add(c.Id);
         }
 
-        return idSet; // Replace null with the variable you used to store the result
+        return idSet; 
     }
 
     /**
