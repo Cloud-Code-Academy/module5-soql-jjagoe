@@ -296,7 +296,7 @@ public with sharing class SOQL {
      */
     public static Account getOpportunityAndAccountNamesForLineItem(Id accountId) {
         Account accWithOpportunuties = [SELECT Id, Name, (SELECT Id, Name FROM Opportunities) FROM Account WHERE Id = :accountId];
-        return accWithOpportunuties; // Replace null with the variable you used to store the result
+        return accWithOpportunuties; 
     }
 
     /**
