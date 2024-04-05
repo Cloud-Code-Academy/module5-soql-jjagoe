@@ -271,8 +271,7 @@ public with sharing class SOQL {
         for (Account acc : accts){
             accountIdsToNamesMap.put(acc.Id, acc.Name);
         }
-
-        return accountIdsToNamesMap; // Replace null with the variable you used to store the result
+        return accountIdsToNamesMap; 
     }
 
     /**
