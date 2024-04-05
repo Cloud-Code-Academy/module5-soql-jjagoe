@@ -284,7 +284,7 @@ public with sharing class SOQL {
     public static String getAccountNameForContact(String contactId) {
         Contact cont = [SELECT Account.Name FROM Contact WHERE Id =: contactId];
         String acctName = cont.Account.Name;
-        return acctName; // Replace null with the variable you used to store the result
+        return acctName; 
     }    
 
     /**
