@@ -185,9 +185,10 @@ public with sharing class SOQL {
         // Use AggregateQuery to get the total revenue
          AggregateResult[] groupedResults = [SELECT AccountId,  SUM(Amount)totRevenue FROM Opportunity WHERE StageName =: stage OR Amount >= 10000 GROUP BY AccountId];  
          Decimal sumTotalRevenue = (Decimal)groupedResults[0].get('totRevenue');
+         
         // Return the total revenue
          return sumTotalRevenue;
-        //return Decimal([SELECT SUM(Amount) FROM Opportunity WHERE StageName =: stage and Amount > 10000]); // Replace null with the variable you used to store the result
+        
     }
 
     /**
