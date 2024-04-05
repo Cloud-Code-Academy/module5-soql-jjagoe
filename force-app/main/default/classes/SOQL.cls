@@ -282,7 +282,9 @@ public with sharing class SOQL {
      * @return The Account Name of the Contact.
      */
     public static String getAccountNameForContact(String contactId) {
-        return null; // Replace null with the variable you used to store the result
+        Contact cont = [SELECT Account.Name FROM Contact WHERE Id =: contactId];
+        String acctName = cont.Account.Name;
+        return acctName; // Replace null with the variable you used to store the result
     }    
 
     /**
