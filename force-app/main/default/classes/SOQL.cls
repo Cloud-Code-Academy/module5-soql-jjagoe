@@ -308,11 +308,19 @@ public with sharing class SOQL {
      */
     public static List<Contact> getAccountsWithContactsByState(Id accountId) {
         // Query the Account
+        Account acc = [SELECT BillingState FROM Account WHERE Id = :accountId LIMIT 1];
+        // Check if the Account with the given Id exists
+        if (acc == null) {
+            return new List<Contact>(); // Return an empty list if the Account does not exist
+        }
 
         // Store the Account's BillingState
+        String billingState = acc.BillingState;
 
-        // Query the Contacts
-        return null; // Replace null with the variable you used to store the result
+        // Query the Contacts with the same Mailing State as the Account's Billing State
+        List<Contact> contactsWithSameState = [SELECT Id, FirstName, LastName, MailingState FROM Contact WHERE MailingState = :billingState];
+    
+        return contactsWithSameState; // Replace null with the variable you used to store the result
     }
 
     /**
