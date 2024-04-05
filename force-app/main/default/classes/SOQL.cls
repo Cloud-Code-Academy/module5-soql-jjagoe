@@ -171,8 +171,8 @@ public with sharing class SOQL {
         }
 
         // Return the list of Contact LastNames
-        return conLastNames; 
-    }
+        return conLastNames;
+     }
 
     /**
      * Question 12
