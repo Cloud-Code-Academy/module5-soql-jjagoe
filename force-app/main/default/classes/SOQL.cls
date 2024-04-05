@@ -227,7 +227,8 @@ public with sharing class SOQL {
      * @return A list of Cases
      */
     public static List<Case> getCasesWithStatus() {
-        return null; // Replace null with the variable you used to store the result
+        List<Case> casesWithStatusList = [SELECT AccountId, Status, Subject, CreatedDate FROM Case WHERE Status = 'Open' ORDER BY CreatedDate LIMIT 10 OFFSET 5];
+        return casesWithStatusList; // Replace null with the variable you used to store the result
     }
 
     /**
