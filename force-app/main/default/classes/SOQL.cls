@@ -262,12 +262,17 @@ public with sharing class SOQL {
      */
     public static Map<Id, String> getAccountIdsToNamesNotInCountry(String country) {
         // Create a map to hold the Account Ids to Account Names
-        Map<Id, String> accountIdsToNames = new Map<Id, String>();
+        Map<Id, String> accountIdsToNamesMap = new Map<Id, String>();
 
         // Query the Accounts
-        // Loop through each Account and add the Id and Name to the map
+        List<Account> accts = [SELECT Id, Name, BillingCountry FROM Account WHERE BillingCountry != : country];
 
-        return null; // Replace null with the variable you used to store the result
+        // Loop through each Account and add the Id and Name to the map
+        for (Account acc : accts){
+            accountIdsToNamesMap.put(acc.Id, acc.Name);
+        }
+
+        return accountIdsToNamesMap; // Replace null with the variable you used to store the result
     }
 
     /**
