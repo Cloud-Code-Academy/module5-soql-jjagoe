@@ -433,13 +433,13 @@ public with sharing class SOQL {
             accountToContactMap.put(cont.AccountId, cont);
         }
 
-        // Loop through each Opportunity and Update the Opportunity primary contact from accountToContactMap
+        // Loop through each Opportunity and 
+        //Update the Opportunity primary contact from accountToContactMap
         for (Opportunity opp : oppsClosedWon) {
             // Update the Opportunity primary contact from accountToContactMap
             opp.Primary_Contact__c = accountToContactMap.get(opp.AccountId).Id;
         }
-        // Update the Opportunity primary contact from accountToContactMap
-
+       
         // Update the Opportunities
         update oppsClosedWon;
     }
