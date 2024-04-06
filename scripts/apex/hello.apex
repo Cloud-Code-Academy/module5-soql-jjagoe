@@ -18,5 +18,27 @@
 //List<Opportunity> closedWonOpps = [SELECT Name, StageName, CloseDate, AccountId, Amount FROM Opportunity WHERE StageName = 'Closed Won' AND AccountId = '001ak00000Ak48yAAB'];
 //System.debug(closedWonOpps);
 //String keyWord = 'Ba';
-List<Case> FilterCaseOriginsList = [SELECT AccountId, Status, Origin FROM Case WHERE Origin != 'Web' OR Origin = 'Email' OR Origin = ''];
-System.debug(FilterCaseOriginsList);
+//List<Case> FilterCaseOriginsList = [SELECT AccountId, Status, Origin FROM Case WHERE Origin != 'Web' OR Origin = 'Email' OR Origin = ''];
+//System.debug(FilterCaseOriginsList);
+Id accountId = '001ak00000Ak44aAAB';
+Account account = [
+    SELECT Name, Rating, Website, BillingCity, 
+           (SELECT Name, Amount FROM Opportunities), 
+           (SELECT Title, Email, Phone FROM Contacts)
+    FROM Account
+    WHERE Id = :accountId
+    LIMIT 1
+];
+
+List<Contact> contacts = account.Contacts;
+List<Opportunity> opportunities = account.Opportunities;
+
+System.debug('Related contacts: ');
+for(Contact contact : contacts) {
+    System.debug(contact);
+}
+
+System.debug('Related opportunities: ');
+for(Opportunity opportunity : opportunities) {
+    System.debug(opportunity);
+}
