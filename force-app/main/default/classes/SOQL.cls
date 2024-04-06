@@ -377,35 +377,29 @@ public with sharing class SOQL {
         // Insert the new line items
 
         // Query the original Opportunity Line Items
-    List<OpportunityLineItem> origOppLineItems = [SELECT Id, OpportunityId, Product2Id, Quantity FROM OpportunityLineItem WHERE OpportunityId = :origOppId];
+        
+    List<OpportunityLineItem> oppLineItems = [SELECT Id, OpportunityId, PricebookEntryId, Quantity, UnitPrice FROM OpportunityLineItem WHERE OpportunityId = :origOppId];
 
-    // Create a map to store the cloned Opportunity Line Items for each clone Opportunity Id
-    Map<Id, List<OpportunityLineItem>> clonedOppLineItemsMap = new Map<Id, List<OpportunityLineItem>>();
+    List<OpportunityLineItem> newOppLineItems = new List<OpportunityLineItem>();// Generate a random number between 1 and 3
+    Integer randomNumber = Math.round(Math.random()*3);
 
     // Iterate through the list of cloned Opportunity Ids
-    for (Id cloneOppId : cloneOppIds) {
-        // Clone the Opportunity Line Items for each clone Opportunity
-        List<OpportunityLineItem> clonedOppLineItems = new List<OpportunityLineItem>();
-        for (OpportunityLineItem origOppLineItem : origOppLineItems) {
-            // Create a new Opportunity Line Item with the cloned Opportunity Id and increase the quantity by a random number between 1 to 3
-            OpportunityLineItem clonedOppLineItem = new OpportunityLineItem(
-                OpportunityId = cloneOppId,
-                Product2Id = origOppLineItem.Product2Id,
-                Quantity = origOppLineItem.Quantity + (Integer)Math.round(Math.random() * 2 + 1) // Add a random number between 1 to 3
-            );
-            clonedOppLineItems.add(clonedOppLineItem);
-        }
-        // Add the cloned Opportunity Line Items to the map
-        clonedOppLineItemsMap.put(cloneOppId, clonedOppLineItems);
+        for (Id cloneOppId : cloneOppIds) {
+                
+                for (OpportunityLineItem singleOppLineItem : oppLineItems) {
+                    OpportunityLineItem cloneOppLineItem = singleOppLineItem.clone(false,true,false,false);
+                    cloneOppLineItem.OpportunityId = cloneOppId;
+                    cloneOppLineItem.Quantity = randomNumber;
+                    newOppLineItems.add(cloneOppLineItem);
+                    
+                }
+          }
+        // Insert the new line items
+         insert newOppLineItems;
     }
 
-    // Insert the cloned Opportunity Line Items
-    List<OpportunityLineItem> allClonedOppLineItems = new List<OpportunityLineItem>();
-    for (List<OpportunityLineItem> clonedOppLineItems : clonedOppLineItemsMap.values()) {
-        allClonedOppLineItems.addAll(clonedOppLineItems);
-    }
-    insert allClonedOppLineItems;
-    }
+    
+    
     
     /**
      * Question 24
