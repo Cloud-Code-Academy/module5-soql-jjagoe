@@ -342,15 +342,13 @@ public with sharing class SOQL {
         for (Lead lead : leadsList) {
             if (lead.Email != null) {
                 // Split the email address to extract the domain
-                String[] parts = lead.Email.split('@');
-                if (parts.size() == 2) { // Ensure it's a valid email format
-                    emailDomains.add(parts[1]);
-                }
+              String singleDomain = 'www.' + (String) lead.Email.substringAfter('@');
+              emailDomains.add(singleDomain);
             }
         }
         
         // Query the Accounts
-        List<Account> accountsWithMatchingDomains = [SELECT Id, Website FROM Account WHERE Website != null AND Website IN :emailDomains];
+        List<Account> accountsWithMatchingDomains = [SELECT Id, Name, Website FROM Account WHERE Website != null AND Website IN :emailDomains];
 
         return accountsWithMatchingDomains; // Replace null with the variable you used to store the result
     }
