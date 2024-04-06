@@ -377,7 +377,7 @@ public with sharing class SOQL {
         // Insert the new line items
 
         // Query the original Opportunity Line Items
-        
+
     List<OpportunityLineItem> oppLineItems = [SELECT Id, OpportunityId, PricebookEntryId, Quantity, UnitPrice FROM OpportunityLineItem WHERE OpportunityId = :origOppId];
 
     List<OpportunityLineItem> newOppLineItems = new List<OpportunityLineItem>();// Generate a random number between 1 and 3
@@ -398,9 +398,6 @@ public with sharing class SOQL {
          insert newOppLineItems;
     }
 
-    
-    
-    
     /**
      * Question 24
      * Retrieves the Opportunity Name, Account Name, and Owner Name for Opportunities that have a Stage of 'Closed Won'.
@@ -419,17 +416,31 @@ public with sharing class SOQL {
      */
     public static void setPrimaryContact() {
         //Use the getOpportunityDetailsForClosedWon() method to get the Opportunities
+        List<Opportunity> oppsClosedWon = getOpportunityDetailsForClosedWon();
 
         // Create a set of Account Ids from the Opportunities
+        Set<Id> accIds = new Set<Id>();
+        for (Opportunity opp : oppsClosedWon) {
+            accIds.add(opp.AccountId);
+        }
 
         // Query the Contacts
+        List<Contact> conts = [SELECT Id, AccountId FROM Contact WHERE AccountId = :accIds];
 
         // Loop through each Contact and add the Account Id and Contact to the map
-        
-        // Loop through each Opportunity
+        Map<Id, Contact> accountToContactMap = new Map<Id, Contact>();
+        for (Contact cont : conts) {
+            accountToContactMap.put(cont.AccountId, cont);
+        }
 
-                // Update the Opportunity primary contact from accountToContactMap
+        // Loop through each Opportunity and Update the Opportunity primary contact from accountToContactMap
+        for (Opportunity opp : oppsClosedWon) {
+            // Update the Opportunity primary contact from accountToContactMap
+            opp.Primary_Contact__c = accountToContactMap.get(opp.AccountId).Id;
+        }
+        // Update the Opportunity primary contact from accountToContactMap
 
         // Update the Opportunities
+        update oppsClosedWon;
     }
 }
